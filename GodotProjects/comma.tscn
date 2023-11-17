@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpn4lxvsslxdl"]
+
+[ext_resource type="Script" path="res://scripts/commaMain.gd" id="1_kq2up"]
+[ext_resource type="Texture2D" uid="uid://b72r87ycsdn1t" path="res://images/COMMA2.png" id="2_4diyq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcwjk"]
+size = Vector2(80, 85)
+
+[sub_resource type="GDScript" id="GDScript_djyi0"]
+script/source = "extends Area2D
+
+func _on_body_entered(body):
+	if body.name == 'Enemy':
+		print(\"in range\")
+		
+	
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ma4ty"]
+atlas = ExtResource("2_4diyq")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb67r"]
+atlas = ExtResource("2_4diyq")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kap63"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ma4ty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rb67r")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_kq2up")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1.5)
+shape = SubResource("RectangleShape2D_kcwjk")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(70, 59)
+script = SubResource("GDScript_djyi0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(6, -113)
+scale = Vector2(5, 5)
+build_mode = 1
+polygon = PackedVector2Array(-15.4309, -12.4249, -4.00802, -8.21643, 4.60922, -0.2004, 7.61523, 11.022, -15.4309, 11.022)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.33, 0.33)
+sprite_frames = SubResource("SpriteFrames_kap63")
+animation = &"walking"
+autoplay = "walking"
+frame_progress = 0.0972308
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, 60.01)
+ignore_rotation = false
+zoom = Vector2(0.5, 0.5)
+limit_left = -75
+limit_top = -350
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

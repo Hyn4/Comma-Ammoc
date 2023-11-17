@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dc0l4oi76mt1a"]
+
+[ext_resource type="Script" path="res://scripts/maccoMain.gd" id="1_7prcl"]
+[ext_resource type="Texture2D" uid="uid://dtwam8ju2gib8" path="res://images/AMMOC2_2.png" id="2_abmb7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcwjk"]
+size = Vector2(67, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utl58"]
+atlas = ExtResource("2_abmb7")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67dwf"]
+atlas = ExtResource("2_abmb7")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rl5qj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utl58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67dwf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(1, -1)
+script = ExtResource("1_7prcl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -1)
+scale = Vector2(1.00292, 1.00304)
+shape = SubResource("RectangleShape2D_kcwjk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.295, 0.295)
+sprite_frames = SubResource("SpriteFrames_rl5qj")
+autoplay = "default"
+frame_progress = 0.0519101

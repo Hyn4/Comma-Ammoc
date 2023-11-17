@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://xf0rjvg7pauj"]
+
+[ext_resource type="Script" path="res://scripts/Final.gd" id="1_maxsg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shrny"]
+size = Vector2(52, 20)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_maxsg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_shrny")
+debug_color = Color(0, 0.392157, 0.458824, 0.419608)
